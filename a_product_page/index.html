@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Socks Product Page</title>
+    <link rel="stylesheet" type="text/css" href="../css/product_style.css">
+</head>
+    <body>
+
+        <div class="nav-bar"></div>
+        <div id="app">
+            <div class="product">
+                <div class="product-image">
+                    <img :src="image" :alt="altText" />
+                </div>
+
+                <div class="product-info">
+                    <h1>{{ product }}</h1>
+                    <p>{{ description }}</p>
+                    <p v-if="inventory > 10">In Stock</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                    <p v-else>Out of Stock</p>
+
+                    <span v-if="onSale" class="onSale">On Sale!</span>
+                    <a class="buyit-button" :href="link">buy it</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script src="../js/custom.js"></script>
+    </body>
+</html>
