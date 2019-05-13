@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Automatic Data Binding</title>
     <script src="../js/vue.js"></script>
 
 </head>
 <body>
 
 <div id="root">
-    <input type="text" id="input" v-model="message" />
+    <input style="width: 200px;height: 20px;" placeholder="what kind of potatoes do you like?" type="text" id="input" v-model="message" />
 
-    <br><br> me : I heart {{ message }} potatoes.
+    <br><br> me : I like my potatoes: <span style="color: red;">{{ message }}</span>
 </div>
 
 <script>
@@ -19,7 +19,7 @@
     new Vue({
         el: '#root',
         data: {
-            message: 'Hello world'
+            message: ''
         }
     });
 
