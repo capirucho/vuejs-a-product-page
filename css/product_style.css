@@ -33,10 +33,19 @@ img {
     width: 50%;
 }
 
+.color-list li {
+    display: inline;
+}
+
 .color-box {
     width: 40px;
     height: 40px;
     margin-top: 5px;
+}
+
+.sizes-list {
+    width: 150px;
+    margin-bottom: 25px;
 }
 
 .cart {

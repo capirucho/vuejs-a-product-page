@@ -8,6 +8,40 @@ var app = new Vue({
         altText: "A fuzzy pair of socks.",
         inStock: true,
         inventory: 10,
-        onSale: true
+        onSale: true,
+        details: ["80% cotton", "20% polyester", "Gender-neutral"],
+        variants: [
+            {
+                variantId: 2234,
+                variantColor: "green"
+            },
+            {
+                variantId: 2235,
+                variantColor: "blue"
+            }
+        ],
+        sizes: [
+            {
+                sizeId: "xs",
+                size: "extra small"
+            },
+            {
+                sizeId: "sm",
+                size: "small"
+            },
+            {
+                sizeId: "md",
+                size: "medium"
+            },
+            {
+                sizeId: "lg",
+                size: "large"
+            },
+            {
+                sizeId: "xl",
+                size: "extra large"
+            }
+
+        ]
     }
 })

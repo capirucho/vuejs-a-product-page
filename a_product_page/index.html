@@ -21,6 +21,22 @@
                     <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
                     <p v-else>Out of Stock</p>
 
+                    <ul >
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+
+                    <h3>Choose your color:</h3>
+                    <ul class="color-list">
+                        <li class="color-box" v-for="variant in variants" :key="variant.variantId">
+                            {{ variant.variantColor }}
+                        </li>
+                    </ul>
+                    <h3>Choose your size:</h3>
+                    <select class="sizes-list" list="sizes" placeholder="choose your size">
+                        <option selected value="">-- sizes -- </option>
+                        <option id="sizes" v-for="size in sizes" :key="size.sizeId" :value="size.sizeId">{{ size.size }}</option>
+                    </select>
+
                     <span v-if="onSale" class="onSale">On Sale!</span>
                     <a class="buyit-button" :href="link">buy it</a>
                 </div>
@@ -30,7 +46,7 @@
 
         </div>
 
-        <script src="../js/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="../js/custom.js"></script>
     </body>
 </html>
