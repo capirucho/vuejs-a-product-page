@@ -33,8 +33,12 @@ img {
     width: 50%;
 }
 
+.color-list {
+    padding-inline-start: 10px;
+}
+
 .color-list li {
-    display: inline;
+    display: inline-block;
 }
 
 .color-box {
@@ -43,9 +47,28 @@ img {
     margin-top: 5px;
 }
 
+.blue {
+    background-color: #1E95EA;
+    width: 50px;
+    height: 20px;
+    margin-top: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.green {
+    background-color: #84CF6A;
+    width: 50px;
+    height: 20px;
+    margin-top: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
 .sizes-list {
     width: 150px;
     margin-bottom: 25px;
+    display: block;
 }
 
 .cart {
@@ -106,8 +129,8 @@ textarea {
     text-align: center;
 }
 
-.buyit-button {
-    display: block;
+.add-to-cart-button {
+    display: inline-block;
     padding: 10px;
     border-radius: 5px;
     width: 100px;
@@ -115,5 +138,10 @@ textarea {
     color: azure;
     text-decoration: none;
     text-align: center;
-    margin: 15px 0 15px 0;
+    margin: 15px 20px 15px 0;
+}
+
+.remove-item {
+    display: inline-block;
+    text-decoration: underline;
 }

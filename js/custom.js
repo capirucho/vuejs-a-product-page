@@ -13,11 +13,13 @@ var app = new Vue({
         variants: [
             {
                 variantId: 2234,
-                variantColor: "green"
+                variantColor: "green",
+                variantImage: "../assets/vmSocks-green-onWhite.jpg"
             },
             {
                 variantId: 2235,
-                variantColor: "blue"
+                variantColor: "blue",
+                variantImage: "../assets/vmSocks-blue-onWhite.jpg"
             }
         ],
         sizes: [
@@ -42,6 +44,23 @@ var app = new Vue({
                 size: "extra large"
             }
 
-        ]
+        ],
+        cart: 0
+    },
+    methods: {
+        addToCart: function () {
+            this.cart += 1
+        },
+        removeFromCart: function () {
+            if (this.cart !== 0) {
+                this.cart -= 1
+            } else {
+                alert('there are 0 items in your cart');
+            }
+
+        },
+        updateProductImage: function (variantImage) {
+            this.image = variantImage
+        }
     }
 })
