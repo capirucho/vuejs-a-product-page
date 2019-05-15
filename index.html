@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>A Socks Product Page</title>
-    <link rel="stylesheet" type="text/css" href="../css/product_style.css">
+    <link rel="stylesheet" type="text/css" href="css/product_style.css">
 </head>
     <body>
 
@@ -22,7 +22,7 @@
                     <p>{{ description }}</p>
                     <p v-if="inventory > 10">In Stock</p>
                     <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-                    <p v-else>Out of Stock</p>
+                    <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
 
                     <ul >
                         <li v-for="detail in details">{{ detail }}</li>
@@ -30,7 +30,7 @@
 
                     <h3>Choose your color:</h3>
                     <ul class="color-list">
-                        <li @mouseover="updateProductImage(variant.variantImage) " v-for="variant in variants" :key="variant.variantId" :class="variant.variantColor">
+                        <li @mouseover="updateProductImage(variant.variantImage) " v-for="variant in variants" :key="variant.variantId" class="color-box" :class="variant.variantColor">
                             {{ variant.variantColor }}
                         </li>
                     </ul>
@@ -41,7 +41,10 @@
                     </select>
 
 
-                    <button class="add-to-cart-button" v-on:click="addToCart">add to cart</button>
+                    <button class="add-to-cart-button"
+                            v-on:click="addToCart"
+                            :disabled="!inStock"
+                            :class="{ disabledButton: !inStock }">add to cart</button>
                     <span class="remove-item" v-on:click="removeFromCart">remove item</span>
                 </div>
             </div>
@@ -51,6 +54,6 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="../js/custom.js"></script>
+        <script src="js/custom.js"></script>
     </body>
 </html>

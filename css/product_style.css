@@ -42,27 +42,19 @@ img {
 }
 
 .color-box {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 20px;
     margin-top: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .blue {
     background-color: #1E95EA;
-    width: 50px;
-    height: 20px;
-    margin-top: 5px;
-    padding: 10px;
-    cursor: pointer;
 }
 
 .green {
     background-color: #84CF6A;
-    width: 50px;
-    height: 20px;
-    margin-top: 5px;
-    padding: 10px;
-    cursor: pointer;
 }
 
 .sizes-list {
@@ -89,7 +81,7 @@ button {
 }
 
 .disabledButton {
-    background-color: #d8d8d8;
+    background-color: #d8d8d8 !important;
 }
 
 .review-form {
@@ -139,9 +131,15 @@ textarea {
     text-decoration: none;
     text-align: center;
     margin: 15px 20px 15px 0;
+    cursor: pointer;
 }
 
 .remove-item {
     display: inline-block;
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.outOfStock {
+    color: red;
 }

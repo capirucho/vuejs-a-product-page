@@ -3,23 +3,23 @@ var app = new Vue({
     data: {
         product: 'Socks',
         description: 'These are comfortable yet supportive socks for running.',
-        image: '../assets/vmSocks-green-onWhite.jpg',
+        image: './assets/vmSocks-green-onWhite.jpg',
         link: 'https://amazon.com',
         altText: "A fuzzy pair of socks.",
-        inStock: true,
-        inventory: 10,
+        inStock: false,
+        inventory: 0,
         onSale: true,
         details: ["80% cotton", "20% polyester", "Gender-neutral"],
         variants: [
             {
                 variantId: 2234,
                 variantColor: "green",
-                variantImage: "../assets/vmSocks-green-onWhite.jpg"
+                variantImage: "./assets/vmSocks-green-onWhite.jpg"
             },
             {
                 variantId: 2235,
                 variantColor: "blue",
-                variantImage: "../assets/vmSocks-blue-onWhite.jpg"
+                variantImage: "./assets/vmSocks-blue-onWhite.jpg"
             }
         ],
         sizes: [
