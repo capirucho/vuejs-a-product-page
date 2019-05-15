@@ -1,25 +1,25 @@
 var app = new Vue({
     el: '#app',
     data: {
+        brand: 'Vue Mastery',
         product: 'Socks',
         description: 'These are comfortable yet supportive socks for running.',
-        image: './assets/vmSocks-green-onWhite.jpg',
-        link: 'https://amazon.com',
+        selectedVariant: 0,
         altText: "A fuzzy pair of socks.",
-        inStock: false,
-        inventory: 0,
         onSale: true,
         details: ["80% cotton", "20% polyester", "Gender-neutral"],
         variants: [
             {
                 variantId: 2234,
                 variantColor: "green",
-                variantImage: "./assets/vmSocks-green-onWhite.jpg"
+                variantImage: "./assets/vmSocks-green-onWhite.jpg",
+                variantQuantity: 9
             },
             {
                 variantId: 2235,
                 variantColor: "blue",
-                variantImage: "./assets/vmSocks-blue-onWhite.jpg"
+                variantImage: "./assets/vmSocks-blue-onWhite.jpg",
+                variantQuantity: 0
             }
         ],
         sizes: [
@@ -59,8 +59,27 @@ var app = new Vue({
             }
 
         },
-        updateProductImage: function (variantImage) {
-            this.image = variantImage
+        updateProductImage: function (index) {
+            this.selectedVariant = index
+        }
+    },
+    computed: {
+        title: function () {
+            return this.brand + ' ' + this.product
+        },
+        image: function () {
+            return this.variants[this.selectedVariant].variantImage
+        },
+        inStock: function () {
+            return this.variants[this.selectedVariant].variantQuantity
+        },
+        sale: function () {
+            if (this.onSale) {
+                return this.brand + ' ' + this.product + ' ' + 'on sale!'
+            } else {
+                return this.brand + ' ' + this.product + ' ' + 'not on sale!'
+            }
+
         }
     }
 })
