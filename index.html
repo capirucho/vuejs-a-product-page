@@ -9,48 +9,7 @@
 
         <div class="nav-bar"></div>
         <div id="app">
-            <div class="cart">
-                <p>Cart({{ cart }})</p>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img :src="image" :alt="altText" />
-                </div>
-
-                <div class="product-info">
-                    <h1>{{ title }}</h1><span class="onSale">{{ sale }}</span>
-                    <p>{{ description }}</p>
-                    <p v-if="inStock > 10">In Stock</p>
-                    <p v-else-if="inStock <= 10 && inStock > 0">Almost sold out!</p>
-                    <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
-
-                    <ul >
-                        <li v-for="detail in details">{{ detail }}</li>
-                    </ul>
-
-                    <h3>Choose your color:</h3>
-                    <ul class="color-list">
-                        <li @mouseover="updateProductImage(index) " v-for="(variant, index) in variants" :key="variant.variantId" class="color-box" :class="variant.variantColor">
-                            {{ variant.variantColor }}
-                        </li>
-                    </ul>
-                    <h3>Choose your size:</h3>
-                    <select class="sizes-list" list="sizes" placeholder="choose your size">
-                        <option selected value="">-- sizes -- </option>
-                        <option id="sizes" v-for="size in sizes" :key="size.sizeId" :value="size.sizeId">{{ size.size }}</option>
-                    </select>
-
-
-                    <button class="add-to-cart-button"
-                            v-on:click="addToCart"
-                            :disabled="!inStock"
-                            :class="{ disabledButton: !inStock }">add to cart</button>
-                    <span class="remove-item" v-on:click="removeFromCart">remove item</span>
-                </div>
-            </div>
-
-
-
+            <product :premium="premium"></product>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
