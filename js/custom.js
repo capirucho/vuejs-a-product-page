@@ -1,3 +1,18 @@
+Vue.component('product-details', {
+    props: {
+        details: {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+        <ul >
+            <li v-for="detail in details">{{ detail }}</li>
+        </ul>    
+    `
+})
+
+
 Vue.component('product', {
     props: {
       premium: {
@@ -27,10 +42,9 @@ Vue.component('product', {
                         <p v-else-if="inStock <= 10 && inStock > 0">Almost sold out!</p>
                         <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
     
-                        <ul >
-                            <li v-for="detail in details">{{ detail }}</li>
-                        </ul>
-    
+                        <!-- details go here -->
+                        <product-details :details="details"></product-details>
+                        
                         <h3>Choose your color:</h3>
                         <ul class="color-list">
                             <li @mouseover="updateProductImage(index) " v-for="(variant, index) in variants" :key="variant.variantId" class="color-box" :class="variant.variantColor">
@@ -141,7 +155,7 @@ Vue.component('product', {
             if (this.premium) {
                 return "Shipping is Free"
             }
-            return 2.99
+            return "Shipping will be " + 2.99
         }
     }
 
@@ -152,6 +166,6 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: false
+        premium: true
     }
 })
