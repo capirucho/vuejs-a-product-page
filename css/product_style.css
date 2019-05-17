@@ -158,3 +158,18 @@ textarea {
     margin: 0 0 15px 0;
     display: block;
 }
+
+.itemsInCart {
+    display: inline-block;
+    border: #d8d8d8 1px solid;
+    border-radius: 5px;
+    position: relative;
+    top: 5px;
+    padding: 10px;
+}
+
+.itemsInCart ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

@@ -10,7 +10,7 @@ Vue.component('product-details', {
             <li v-for="detail in details">{{ detail }}</li>
         </ul>    
     `
-})
+});
 
 
 Vue.component('product', {
@@ -22,11 +22,6 @@ Vue.component('product', {
     },
     template: `
             <div class="product">
-                <div class="flex-container">
-                    <div class="cart">
-                        <p>Cart({{ cart }})</p>
-                    </div>
-                </div>
                 <div class="flex-container">
                     <div class="product-image">
                         <img :src="image" :alt="altText" />
@@ -61,14 +56,23 @@ Vue.component('product', {
                         <button class="add-to-cart-button"
                                 v-on:click="addToCart"
                                 :disabled="!inStock"
-                                :class="{ disabledButton: !inStock }">add to cart</button>
+                                :class="{ disabledButton: !inStock }">add to cart
+                       </button>
+                                
                         <span class="remove-item" v-on:click="removeFromCart">remove item</span>
+                        <!--<div class="itemsInCart" v-show="showItemsToRemove">-->
+                            <!--<ul>-->
+                                <!--<li v-on:click="removeItem">test</li>-->
+                                <!--<li v-on:click="removeItem">test</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
     `,
     data: function () {
         return {
+            //showItemsToRemove: false,
             brand: 'Vue Mastery',
             product: 'Socks',
             description: 'These are comfortable yet supportive socks for running.',
@@ -87,7 +91,7 @@ Vue.component('product', {
                     variantId: 2235,
                     variantColor: "blue",
                     variantImage: "./assets/vmSocks-blue-onWhite.jpg",
-                    variantQuantity: 0
+                    variantQuantity: 12
                 }
             ],
             sizes: [
@@ -111,22 +115,16 @@ Vue.component('product', {
                     sizeId: "xl",
                     size: "extra large"
                 }
-
-            ],
-            cart: 0
+            ]
         }
     },
 
     methods: {
         addToCart: function () {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
         removeFromCart: function () {
-            if (this.cart !== 0) {
-                this.cart -= 1
-            } else {
-                alert('there are 0 items in your cart');
-            }
+            this.$emit('remove-item-from-cart', this.variants[this.selectedVariant].variantId)
 
         },
         updateProductImage: function (index) {
@@ -166,6 +164,20 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        addItem(id) {
+            this.cart.push(id)
+        },
+        removeItem(id) {
+                for(var i = this.cart.length - 1; i >= 0; i--) {
+                    if (this.cart[i] === id) {
+                        this.cart.splice(i, 1)
+                    }
+                }
+        }
+
     }
-})
+});
