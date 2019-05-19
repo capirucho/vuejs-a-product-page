@@ -4,11 +4,14 @@ body {
     margin: 0px;
 }
 
-.flex-container {
+
+
+.flex-container-right-justified {
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
 }
+
 
 .nav-bar {
     background: linear-gradient(-90deg, #84CF6A, #16C0B0);
@@ -71,12 +74,12 @@ img {
 
 .cart {
     margin-right: 25px;
-    float: right;
     border: 1px solid #d8d8d8;
     padding: 5px 20px;
     width: 50px;
     height: 50px;
 }
+
 
 button {
     margin-top: 30px;
@@ -92,17 +95,10 @@ button {
     background-color: #d8d8d8 !important;
 }
 
-.review-form {
-    width: 400px;
-    padding: 20px;
-    margin: 40px;
-    border: 1px solid #d8d8d8;
-}
-
 input {
-    width: 100%;
-    height: 25px;
-    margin-bottom: 20px;
+    /*width: 100%;*/
+    /*height: 25px;*/
+    /*margin-bottom: 20px;*/
 }
 
 textarea {
@@ -172,4 +168,39 @@ textarea {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+/** reviews *****/
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form {
+    width: 40%;
+    background-color: #faf8f7;
+    padding: 20px;
+    margin: 10px;
+    border: none;
+}
+
+.review-form form {
+    width: 300px;
+    padding: 25px;
+    background-color: #ececec;
+}
+
+.review-form .submit {
+    width: 120px;
+    background-color: #14373e;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: .9rem;
+    height: 45px;
+
+}
+.review-form input[type="radio"] {
+    width: 16px;
 }
