@@ -19,9 +19,10 @@ body {
     margin-bottom: 15px;
 }
 
-.product {
-    /*display: flex;*/
-    flex-flow: wrap;
+.product-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     padding: 1rem;
 }
 
@@ -106,14 +107,21 @@ textarea {
     height: 60px;
 }
 
+.tabs-header {
+    background-color: #e7e8e7;
+    padding: 15px;
+}
+
 .tab {
-    margin-left: 20px;
     cursor: pointer;
+    padding: 15px 15px 14px 15px;
 }
 
 .activeTab {
     color: #16C0B0;
-    text-decoration: underline;
+    border-top: 1px solid;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .onSale {

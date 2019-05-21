@@ -1,3 +1,53 @@
+var eventBus = new Vue();
+
+Vue.component('product-tabs', {
+    props: {
+      reviews: {
+          type: Array,
+          required: true
+      }
+    },
+    template:`
+        <div>
+            <div class="tabs-header">
+                <span class="tab" 
+                      :class="{ activeTab: selectedTab === tab }"
+                      v-for="(tab, index) in tabs" 
+                      :key="index" 
+                      @click="selectedTab = tab">
+                      {{ tab }}</span>
+            </div>
+            <div>
+                <div v-show="selectedTab === 'Reviews'">
+                    <h3>Reviews</h3>
+                    <p v-if="reviews.length < 1">There are no reviews yet.</p>
+                    <ul v-else>
+                        <li v-for="(review, index) in reviews" :key="index">
+                            <p><b>Review by: {{ review.name }}</b></p>
+                            <p>{{ review.review }}</p>
+                            <p>Rating: {{ review.rating }}</p>                            
+                            <p>Would you recommend? {{ review.recommend}}</p>
+                        </li>
+                    </ul>                
+                </div>
+                <div v-show="selectedTab === 'Write a Review'">
+                    <div class="review-form">
+                        <product-review></product-review>
+                    </div>
+                </div>                                
+
+            </div>              
+        </div>      
+    `,
+    data: function () {
+        return {
+            tabs: ['Reviews', 'Write a Review'],
+            selectedTab: 'Reviews'
+        };
+    }
+});
+
+
 Vue.component('product-review', {
    template: `
     <form @submit.prevent="onSubmit">
@@ -60,7 +110,7 @@ Vue.component('product-review', {
                    rating: this.rating,
                    recommend: this.recommend
                };
-               this.$emit('review-submitted', productReview);
+               eventBus.$emit('review-submitted', productReview);
                this.name = null;
                this.review = null;
                this.rating = null;
@@ -110,12 +160,11 @@ Vue.component('product', {
       }
     },
     template: `
-            <div class="product">
-                <div class="flex-container-right-justified">
+            <div >
+                <div class="product-content">
                     <div class="product-image">
                         <img :src="image" :alt="altText" />
                     </div>
-
                     <div class="product-info">
                         <h1>{{ title }}</h1>
                         <span class="membership-status" v-if="premium">You are a premium member: {{ shipping }}</span>
@@ -157,22 +206,7 @@ Vue.component('product', {
                         <!--</div>-->
                     </div>
                 </div>
-                <div class="reviews">
-                    <h3>Write a Review</h3>
-                    <div class="review-form">
-                        <product-review @review-submitted="addReview"></product-review>
-                    </div>
-                    <h3>Reviews</h3>
-                    <p v-if="reviews.length < 1">There are no reviews yet.</p>
-                    <ul>
-                        <li v-for="review in reviews">
-                            <p><b>Review by: {{ review.name }}</b></p>
-                            <p>{{ review.review }}</p>
-                            <p>Rating: {{ review.rating }}</p>                            
-                            <p>Would you recommend? {{ review.recommend}}</p>
-                        </li>
-                    </ul>
-                </div>
+                <product-tabs :reviews="reviews"></product-tabs>
             </div>
     `,
     data: function () {
@@ -227,43 +261,44 @@ Vue.component('product', {
 
     methods: {
         addToCart: function () {
-            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
         removeFromCart: function () {
-            this.$emit('remove-item-from-cart', this.variants[this.selectedVariant].variantId)
-
+            this.$emit('remove-item-from-cart', this.variants[this.selectedVariant].variantId);
         },
         updateProductImage: function (index) {
-            this.selectedVariant = index
-        },
-        addReview: function (productReview) {
-            this.reviews.push(productReview)
+            this.selectedVariant = index;
         }
     },
     computed: {
         title: function () {
-            return this.brand + ' ' + this.product
+            return this.brand + ' ' + this.product;
         },
         image: function () {
-            return this.variants[this.selectedVariant].variantImage
+            return this.variants[this.selectedVariant].variantImage;
         },
         inStock: function () {
-            return this.variants[this.selectedVariant].variantQuantity
+            return this.variants[this.selectedVariant].variantQuantity;
         },
         sale: function () {
             if (this.onSale) {
-                return this.brand + ' ' + this.product + ' ' + 'on sale!'
+                return this.brand + ' ' + this.product + ' ' + 'on sale!';
             } else {
-                return this.brand + ' ' + this.product + ' ' + 'not on sale!'
+                return this.brand + ' ' + this.product + ' ' + 'not on sale!';
             }
 
         },
         shipping: function () {
             if (this.premium) {
-                return "Shipping is Free"
+                return "Shipping is Free";
             }
-            return "Shipping will be " + 2.99
+            return "Shipping will be " + 2.99;
         }
+    },
+    mounted: function() {
+        eventBus.$on('review-submitted', productReview => {
+            this.reviews.push(productReview);
+        });
     }
 
 });
